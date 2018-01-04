@@ -9,11 +9,18 @@ var starty = 10;
 var len = 300;
 var wid = 200; 
 
+//Chromosome
+var chromL;
+var newChrom;
+var cellParam;
+var hueParam;
+var run = false;
+
 function setup(){
     createCanvas (940, 640);
     colorMode(HSB);
     
-    background(256);
+    background(0);
     noStroke();
     
     //testGrid = new Grid();
@@ -21,21 +28,35 @@ function setup(){
     arrayLength = 11;
     gridArray = Array(arrayLength);
     
+    chromL = 9;
+    
     for(var i = 0; i < arrayLength; i++){
+        newChrom = Math.floor(random(1,2**chromL));
+        /*
+        while(!run){
+            newChrom = Math.floor(random(2**chromL));
+            if(newChrom === 0){
+                newChrom = Math.floor(random(2**chromL));
+            }
+            else{
+                run = true;
+            }
+            */
+        console.log("Chromosome: " + newChrom);
            
-        gridArray[i] = new gridRand(startx, starty, len, wid);
+        gridArray[i] = new gridRand(newChrom, startx, starty, len, wid);
         
         if(startx < 850){
             startx += 310;
         }
         else{
-            startx = 10;
-            if(starty < 430){
-            starty += 210;
-        }
-        else{
-            starty = 10;
-        }
+                startx = 10;
+                if(starty < 430){
+                starty += 210;
+            }
+            else{
+                starty = 10;
+            }
         }
         
     }
@@ -50,9 +71,7 @@ function draw(){
     //ranGrid.display();
     //gridArray[0].display();
     
-    
     for(var i = 0; i < arrayLength; i++){
         gridArray[i].display();
     }
-    
 }
