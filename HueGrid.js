@@ -6,6 +6,8 @@ In class
 function Grid(){
     var hueGrid;
     
+    
+    
     var hueDev = 5;
     var maxHue = 360;
     var cellSize = 10;
@@ -52,17 +54,19 @@ function Grid(){
 }
 
 //grid with randomized values
-function gridRand(){
+function gridRand(param_x, param_y, len, wid){
     var hueGrid;
+    
+    var upperX = param_x;
+    var upperY = param_y;
     
     var hueDev = Math.floor(Math.random()*8);
     var maxHue = 360;
-    //var cellSize = 10;
-    var cellSize = Math.floor(random(7,15));
+    var cellSize = Math.floor(random(5,13));
     
     //Based on size of window
-    var nRows = Math.floor(300 / cellSize + 1);
-    var nCols = Math.floor(400 / cellSize + 1);
+    var nRows = Math.floor(wid / cellSize + 1);
+    var nCols = Math.floor(len / cellSize + 1);
     
     //Initialize array
     hueGrid = Array(nRows);    
@@ -78,12 +82,14 @@ function gridRand(){
             
             
             hueGrid[i][j] = eval(thisType);
-            console.log("filled the grid");
+            //console.log("filled the grid");
         }
     }
     
     //Show it
     this.display = function(){
+        push()
+        translate(upperX, upperY);
         //drawing cells of the grid
         //Columns
         for (let i = 0; i < hueGrid.length; i++){
@@ -104,6 +110,7 @@ function gridRand(){
                 rect( j * cellSize, i * cellSize, cellSize, cellSize);
             }
         }
+        pop();
     }
 }
 
